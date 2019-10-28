@@ -7,15 +7,19 @@
   
   <title>调用函数指令栈空间变化 | 魏江水</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="入栈规则 Cdecl   参数入栈规则：从右到左  还原栈：由调用者来修改栈   Stdcall 参数入栈规则：从右到左。  还原栈：由被调用函数来修改栈   Fastcall  参数入栈：第一个跟第二个通过 ecx跟edx传递，剩余函数从右到左入栈  还原栈：被调用者修改    Int A()   {       B(x,y,z);   }调用前ebp与esp值   先将参数压入栈，按照从右到左">
+  <meta name="description" content="入栈规则(32位调用约定) Cdecl   参数入栈规则：从右到左  还原栈：由调用者来修改栈   Stdcall 参数入栈规则：从右到左。  还原栈：由被调用函数来修改栈   Fastcall  参数入栈：第一个跟第二个通过 ecx跟edx传递，剩余函数从右到左入栈  还原栈：被调用者修改    Int A()   {       B(x,y,z);   }调用前ebp与esp值 先将参数压入栈">
 <meta property="og:type" content="article">
 <meta property="og:title" content="调用函数指令栈空间变化">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;10&#x2F;28&#x2F;%E8%B0%83%E7%94%A8%E5%87%BD%E6%95%B0%E6%8C%87%E4%BB%A4%E6%A0%88%E7%A9%BA%E9%97%B4%E5%8F%98%E5%8C%96&#x2F;index.html">
 <meta property="og:site_name" content="魏江水">
-<meta property="og:description" content="入栈规则 Cdecl   参数入栈规则：从右到左  还原栈：由调用者来修改栈   Stdcall 参数入栈规则：从右到左。  还原栈：由被调用函数来修改栈   Fastcall  参数入栈：第一个跟第二个通过 ecx跟edx传递，剩余函数从右到左入栈  还原栈：被调用者修改    Int A()   {       B(x,y,z);   }调用前ebp与esp值   先将参数压入栈，按照从右到左">
+<meta property="og:description" content="入栈规则(32位调用约定) Cdecl   参数入栈规则：从右到左  还原栈：由调用者来修改栈   Stdcall 参数入栈规则：从右到左。  还原栈：由被调用函数来修改栈   Fastcall  参数入栈：第一个跟第二个通过 ecx跟edx传递，剩余函数从右到左入栈  还原栈：被调用者修改    Int A()   {       B(x,y,z);   }调用前ebp与esp值 先将参数压入栈">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-10-28T03:15:24.857Z">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;image&#x2F;1.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;image&#x2F;2.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;image&#x2F;3.png">
+<meta property="og:updated_time" content="2019-10-28T07:59:09.436Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;image&#x2F;1.png">
   
     <link rel="alternate" href="/atom.xml" title="魏江水" type="application/atom+xml">
   
@@ -84,7 +88,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="入栈规则"><a href="#入栈规则" class="headerlink" title="入栈规则"></a>入栈规则</h2><ul>
+        <h2 id="入栈规则-32位调用约定"><a href="#入栈规则-32位调用约定" class="headerlink" title="入栈规则(32位调用约定)"></a>入栈规则(32位调用约定)</h2><ul>
 <li>Cdecl  <blockquote>
 <p>参数入栈规则：从右到左<br>  还原栈：由调用者来修改栈</p>
 </blockquote>
@@ -101,9 +105,8 @@
 <pre><code>Int A()  
 {  
     B(x,y,z);  
-}</code></pre><p>调用前ebp与esp值  </p>
-<p>先将参数压入栈，按照从右到左原则入栈<br>Push 参数z<br>Push 参数y<br>Push 参数x<br>然后执行Call指令<br>Call指令将eip指令之后的指令压入栈，然后跳转到call之后的地址<br>push eip<br>eip-&gt;地址<br> 此时栈空间如图<br>函数开始将ebp压入栈，将ebp设置为此时的esp，开辟局部变量栈空间<br>Push ebp<br>Mov ebp，esp</p>
-<p>当函数结束后，首先取出令ebp为a栈ebp<br>Pop ebp<br>然后pop eip<br>此时程序跳转到eip对于的指令，即call下一个的指令<br>Retn<br>Esp指向a的栈顶<br> 函数调用结束，</p>
+}</code></pre><p>调用前ebp与esp值<br><img src="/image/1.png" alt="Image text"></p>
+<p>先将参数压入栈，按照从右到左原则入栈<br>Push 参数z<br>Push 参数y<br>Push 参数x<br>然后执行Call指令<br>Call指令将eip指令之后的指令压入栈，然后跳转到call之后的地址<br>push eip<br>eip-&gt;地址<br> 此时栈空间如图<br><img src="/image/2.png" alt="Image text"><br>函数开始将ebp压入栈，将ebp设置为此时的esp，开辟局部变量栈空间<br>Push ebp<br>Mov ebp，esp<br> <img src="/image/3.png" alt="image text"><br>当函数结束后，首先取出令ebp为a栈ebp<br>Pop ebp<br>然后pop eip<br>此时程序跳转到eip对于的指令，即call下一个的指令<br>Retn<br>Esp指向a的栈顶<br>![image]<br> 函数调用结束，</p>
 
       
     </div>

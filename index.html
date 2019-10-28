@@ -83,7 +83,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="入栈规则"><a href="#入栈规则" class="headerlink" title="入栈规则"></a>入栈规则</h2><ul>
+        <h2 id="入栈规则-32位调用约定"><a href="#入栈规则-32位调用约定" class="headerlink" title="入栈规则(32位调用约定)"></a>入栈规则(32位调用约定)</h2><ul>
 <li>Cdecl  <blockquote>
 <p>参数入栈规则：从右到左<br>  还原栈：由调用者来修改栈</p>
 </blockquote>
@@ -100,9 +100,8 @@
 <pre><code>Int A()  
 {  
     B(x,y,z);  
-}</code></pre><p>调用前ebp与esp值  </p>
-<p>先将参数压入栈，按照从右到左原则入栈<br>Push 参数z<br>Push 参数y<br>Push 参数x<br>然后执行Call指令<br>Call指令将eip指令之后的指令压入栈，然后跳转到call之后的地址<br>push eip<br>eip-&gt;地址<br> 此时栈空间如图<br>函数开始将ebp压入栈，将ebp设置为此时的esp，开辟局部变量栈空间<br>Push ebp<br>Mov ebp，esp</p>
-<p>当函数结束后，首先取出令ebp为a栈ebp<br>Pop ebp<br>然后pop eip<br>此时程序跳转到eip对于的指令，即call下一个的指令<br>Retn<br>Esp指向a的栈顶<br> 函数调用结束，</p>
+}</code></pre><p>调用前ebp与esp值<br><img src="/image/1.png" alt="Image text"></p>
+<p>先将参数压入栈，按照从右到左原则入栈<br>Push 参数z<br>Push 参数y<br>Push 参数x<br>然后执行Call指令<br>Call指令将eip指令之后的指令压入栈，然后跳转到call之后的地址<br>push eip<br>eip-&gt;地址<br> 此时栈空间如图<br><img src="/image/2.png" alt="Image text"><br>函数开始将ebp压入栈，将ebp设置为此时的esp，开辟局部变量栈空间<br>Push ebp<br>Mov ebp，esp<br> <img src="/image/3.png" alt="image text"><br>当函数结束后，首先取出令ebp为a栈ebp<br>Pop ebp<br>然后pop eip<br>此时程序跳转到eip对于的指令，即call下一个的指令<br>Retn<br>Esp指向a的栈顶<br>![image]<br> 函数调用结束，</p>
 
       
     </div>
