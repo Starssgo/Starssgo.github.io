@@ -30,10 +30,10 @@
 ]]></content>
   </entry>
   <entry>
-    <title>格式化字符串在bss段大的处理</title>
-    <url>/2019/12/06/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%9C%A8bss%E6%AE%B5%E5%A4%A7%E7%9A%84%E5%A4%84%E7%90%86/</url>
+    <title>格式化字符串在bss段的处理</title>
+    <url>/2019/12/06/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%9C%A8bss%E6%AE%B5%E7%9A%84%E5%A4%84%E7%90%86/</url>
     <content><![CDATA[<p><a href="http://starssgo.github.io/file/login" target="_blank" rel="noopener">题目地址</a>  </p>
-<h2 id="检查保护"><a href="#检查保护" class="headerlink" title="检查保护"></a>检查保护</h2><p><img src="/2019/12/06/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%9C%A8bss%E6%AE%B5%E5%A4%A7%E7%9A%84%E5%A4%84%E7%90%86/1.jpg" alt></p>
+<h2 id="检查保护"><a href="#检查保护" class="headerlink" title="检查保护"></a>检查保护</h2><p><img src="/2019/12/06/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%9C%A8bss%E6%AE%B5%E7%9A%84%E5%A4%84%E7%90%86/1.jpg" alt></p>
 <h2 id="寻找漏洞"><a href="#寻找漏洞" class="headerlink" title="寻找漏洞"></a>寻找漏洞</h2><p>拖入ida分析，查找漏洞  </p>
 ]]></content>
   </entry>
