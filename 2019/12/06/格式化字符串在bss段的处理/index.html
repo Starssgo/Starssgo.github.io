@@ -16,12 +16,12 @@
     
     
 
-    <meta name="description" content="题目地址   检查保护32位程序，保护就开了栈保护   寻找漏洞拖入ida，分析成绩流程主函数让你输入name，其中name在bss段中，然后进入sub_80485E3函数sub_80485E3函数没啥东西，对name的处理也是正确的 12345int sub_80485E3()&amp;#123;  printf(&amp;quot;hello, %s&amp;quot;, &amp;amp;unk_804B080);  re">
+    <meta name="description" content="title: 格式化字符串在bss段处理date: 2019-12-6 18:33:06tags: 格式化字符串  题目地址   检查保护32位程序，保护就开了栈保护   寻找漏洞拖入ida，分析成绩流程主函数让你输入name，其中name在bss段中，然后进入sub_80485E3函数sub_80485E3函数没啥东西，对name的处理也是正确的 12345int sub_80485E3()&amp;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="格式化字符串在bss段的处理 | starssgo的博客">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;06&#x2F;%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%9C%A8bss%E6%AE%B5%E7%9A%84%E5%A4%84%E7%90%86&#x2F;index.html">
 <meta property="og:site_name" content="starssgo的博客">
-<meta property="og:description" content="题目地址   检查保护32位程序，保护就开了栈保护   寻找漏洞拖入ida，分析成绩流程主函数让你输入name，其中name在bss段中，然后进入sub_80485E3函数sub_80485E3函数没啥东西，对name的处理也是正确的 12345int sub_80485E3()&amp;#123;  printf(&amp;quot;hello, %s&amp;quot;, &amp;amp;unk_804B080);  re">
+<meta property="og:description" content="title: 格式化字符串在bss段处理date: 2019-12-6 18:33:06tags: 格式化字符串  题目地址   检查保护32位程序，保护就开了栈保护   寻找漏洞拖入ida，分析成绩流程主函数让你输入name，其中name在bss段中，然后进入sub_80485E3函数sub_80485E3函数没啥东西，对name的处理也是正确的 12345int sub_80485E3()&amp;">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;06&#x2F;%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%9C%A8bss%E6%AE%B5%E7%9A%84%E5%A4%84%E7%90%86&#x2F;1.jpg">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;06&#x2F;%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%9C%A8bss%E6%AE%B5%E7%9A%84%E5%A4%84%E7%90%86&#x2F;2.jpg">
@@ -31,7 +31,7 @@
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;06&#x2F;%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%9C%A8bss%E6%AE%B5%E7%9A%84%E5%A4%84%E7%90%86&#x2F;6.jpg">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;06&#x2F;%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%9C%A8bss%E6%AE%B5%E7%9A%84%E5%A4%84%E7%90%86&#x2F;7.jpg">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;06&#x2F;%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%9C%A8bss%E6%AE%B5%E7%9A%84%E5%A4%84%E7%90%86&#x2F;8.jpg">
-<meta property="og:updated_time" content="2019-12-09T08:34:04.827Z">
+<meta property="og:updated_time" content="2019-12-20T13:05:25.992Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;06&#x2F;%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%9C%A8bss%E6%AE%B5%E7%9A%84%E5%A4%84%E7%90%86&#x2F;1.jpg">
     
@@ -178,7 +178,10 @@ classes that you can use:
   </header>
 
   <section id="post-content" class="article-content post">
-    <p><a href="http://starssgo.github.io/file/login" target="_blank" rel="noopener">题目地址</a>  </p>
+    <hr>
+<p>title: 格式化字符串在bss段处理<br>date: 2019-12-6 18:33:06<br>tags: 格式化字符串</p>
+<hr>
+<p><a href="http://starssgo.github.io/file/login" target="_blank" rel="noopener">题目地址</a>  </p>
 <h2 id="检查保护"><a href="#检查保护" class="headerlink" title="检查保护"></a>检查保护</h2><p><img src="/2019/12/06/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%9C%A8bss%E6%AE%B5%E7%9A%84%E5%A4%84%E7%90%86/1.jpg" alt><br>32位程序，保护就开了栈保护  </p>
 <h2 id="寻找漏洞"><a href="#寻找漏洞" class="headerlink" title="寻找漏洞"></a>寻找漏洞</h2><p>拖入ida，分析成绩流程<br><img src="/2019/12/06/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%9C%A8bss%E6%AE%B5%E7%9A%84%E5%A4%84%E7%90%86/2.jpg" alt><br>主函数让你输入name，其中name在bss段中，然后进入<code>sub_80485E3</code>函数<br><code>sub_80485E3</code>函数没啥东西，对name的处理也是正确的</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">int sub_80485E3()</span><br><span class="line">&#123;</span><br><span class="line">  printf(&quot;hello, %s&quot;, &amp;unk_804B080);</span><br><span class="line">  return sub_804854B();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
