@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>web命令执行</title>
+    <url>/2020/03/14/web%E5%AD%97%E8%8A%82%E6%B3%A8%E5%85%A5/</url>
+    <content><![CDATA[<p>昨天战队小培训，W4nder师傅给我们讲了讲web知识，对我来说还是挺难的。  </p>
+<a id="more"></a>  
+<h3 id="无回显"><a href="#无回显" class="headerlink" title="无回显"></a>无回显</h3><p><a href="http://123.57.240.205:4002" target="_blank" rel="noopener">不知道环境会存在多久</a>  </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">exec($_GET[&apos;cmd&apos;]);</span><br><span class="line"></span><br><span class="line">```  </span><br><span class="line">代码是这样的。刚开始让我自己做的时候我就发现为啥不显示，到晚上师傅讲我才知道exec()是没有回显的，那挺尴尬的。  </span><br><span class="line">然后就是liunx语句了。 cat /flag &gt;a 将`cat /flag`重定向到a里，访问a，就得到flag  </span><br><span class="line">```payload</span><br><span class="line">http://123.57.240.205:4002/?cmd=cat /flag &gt;a</span><br><span class="line">http://123.57.240.205:4002/a</span><br></pre></td></tr></table></figure>
+<h3 id="限制后缀"><a href="#限制后缀" class="headerlink" title="限制后缀"></a>限制后缀</h3><p><a href="http://123.57.240.205:4005" target="_blank" rel="noopener">不知道环境会存在多久</a>   </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">$filename=$_GET[&apos;path&apos;];</span><br><span class="line">if(!preg_match(&quot;/^[a-zA-Z0-9]+.txt$/m&quot;, $filename))&#123;</span><br><span class="line">    die(&apos;false&apos;);</span><br><span class="line">&#125;</span><br><span class="line">else&#123;</span><br><span class="line">    echo exec(&apos;cat &apos;.$filename);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">false</span><br><span class="line">```  </span><br><span class="line">正则匹配`.txt`文件，这里学到的东西是`/m`表示开启多行匹配，大概是可以用%0a也就是换行符绕过  </span><br><span class="line">`payload=1.txt%0acat /flag`</span><br><span class="line">### 长度限制  </span><br><span class="line">[不知道环境会存在多久](http://123.57.240.205:4001)   </span><br><span class="line">进去后查看源代码可以发现php代码</span><br></pre></td></tr></table></figure>
+<p>$sandbox = ‘./sandbox/‘ . md5(“xxx” . $_SERVER[‘REMOTE_ADDR’]);<br>    @mkdir($sandbox);<br>    @chdir($sandbox);<br>echo $sandbox;<br>file_put_contents(‘flag.php’,’&lt;?php $flag=”flag{***}”;’);<br>if (isset($_GET[‘cmd’]) &amp;&amp; strlen($_GET[‘cmd’]) &lt;= 5) {<br>       @exec($_GET[‘cmd’]);<br>} else if (isset($_GET[‘reset’])) {<br>       @exec(‘/bin/rm -rf ‘ . $sandbox);<br>    header(‘Location:index.php’);<br>}else{<br>    die(‘die’);<br>}</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">大概思路是get一个cmd cmd的长度小于等于5，其实也是考liunx的cmd命令来绕过  </span><br><span class="line">![](web字节注入/2.jpg)  </span><br><span class="line">大概就是个这个思路，当你ls时，*的流为cat flag 你在把 *重定位到 a里，访问a 就可以拿到flag  </span><br><span class="line">### 无字母数字shell  </span><br><span class="line">[不知道环境会存在多久](http://123.57.240.205:4003)</span><br></pre></td></tr></table></figure>
+<p>&lt;?php<br>show_source(<strong>FILE</strong>);<br>$mess=$_GET[‘mess’];<br>if(preg_match(“/[a-zA-Z]/“,$mess)){<br>    die(“invalid input!”);<br>}<br>eval($mess);</p>
+<p>```<br>这个的话感觉记住这个payload就可以<br>大概就是用两个不是字母数字的字符异或等于一个字母，来制作个后门，然后post一个读文件过去<br><img src="/2020/03/14/web%E5%AD%97%E8%8A%82%E6%B3%A8%E5%85%A5/1.jpg" alt>  </p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>好久没接触web了，这个思路确实挺奇特的，不过除了绕过正则的那几个题，其他的基本就是考一点liunx命令的应用。怎么用更简单，符合条件的命令来拿到flag，这是我不会，并且要学习的地方。感觉<br>收获真的多。</p>
+]]></content>
+      <tags>
+        <tag>web</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>高校战“疫”网络安全分享赛pwn部分wp</title>
     <url>/2020/03/09/%E9%AB%98%E6%A0%A1%E6%88%98%E2%80%9C%E7%96%AB%E2%80%9D%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%88%86%E4%BA%AB%E8%B5%9B%E9%83%A8%E5%88%86wp/</url>
     <content><![CDATA[<p>今天在复现题目的时候感觉收获太大了，赶紧写下总结顺便整理下exp</p>
