@@ -45,7 +45,7 @@
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>条件竞争相对难察觉，并且在复现和调试方面会比较困难。条件竞争造成的影响也是多样的.至少在kernel方面。要学会灵活运用。<br><a href="https://wiki.x10sec.org/pwn/race-condition/introduction/" target="_blank" rel="noopener">参考链接</a>  </p>
 ]]></content>
       <tags>
-        <tag>kernel</tag>
+        <tag>Kernel</tag>
       </tags>
   </entry>
   <entry>
