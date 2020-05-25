@@ -4,6 +4,7 @@
     <title>GKCTF_pwn_Domo(出题人角度)</title>
     <url>/2020/05/24/GKCTF-pwn-Domo/</url>
     <content><![CDATA[<p>首先是昨天举行的GKCTF顺利举办,特别感谢为我们辛苦做题目测试与运维的glzjin师傅,为我们的比赛前前后后忙活了好几天。然后感谢各位师傅们辛苦来打比赛。<br>这次比赛我出了一道pwn,后来跟师傅们讨论的时候发现师傅们都是通过非预期来拿下flag的,这也让我学到了很多…  </p>
+<a id="more"></a> 
 <h3 id="出题人的想法"><a href="#出题人的想法" class="headerlink" title="出题人的想法"></a>出题人的想法</h3><p>关于本次比赛的话,做题的师傅们比想象的要少,当时看到官方群里刷刷的涨到了1000+人,我当时挺慌的,就想出一个让大多数师傅都觉得不错的一道题,我的压力其实不是特别的大,我的是个签到题(好像不太友好)。<br>但是做题情况有些不尽人意,domo只有6个人出了,whali3n51师傅费尽心思设计的一个非常棒二叉树好像没多少人去研究(C++劝退),还有最后的女盆友多线程的题,利用也是非常简单,但是pwn师傅们好像都没怎么去研究了,可能都去做宝可梦去了(宝可梦真好玩)。  </p>
 <h4 id="关于非预期"><a href="#关于非预期" class="headerlink" title="关于非预期"></a>关于非预期</h4><p>我这个题在设计的时候其实就已经考虑到了会有很多非预期解,当我用scanf去输入数字,还有我在程序的最后才加入的seccomp保护,都给了这个程序太多的利用方式了.<br>我认为pwn本身就是一个不局限于正常思维的一门技术,想让大家都用一种方式去利用程序漏洞太过于勉强了,大家用不同的方式拿下flag也让我学会了很多。<br>到最后我还挺兴奋当时留下了好多非预期解,可能没这几个非预期pwn的题目出的人会更少,可能奖品都不好发出去。</p>
 <h3 id="预期做法"><a href="#预期做法" class="headerlink" title="预期做法"></a>预期做法</h3><p><a href="https://github.com/Starssgo/pwn_challange/blob/master/domo/domo.c" target="_blank" rel="noopener">源码</a><br>本意是想考察师傅们对与io_file的利用,本来的想法是利用off-by-one分别泄露heap_addr,libc_addr,然后控制IO_stdout_来泄露stack的地址,然后控制_IO_stdin来往返回地址写入ORW,<br>但是在查看了师傅们的wp后发现,好像没有预期解的.<br>这里我解释下预期解需要的知识点:<br>在IO_stdout中(泄露stack_addr)<br>    更改_IO_write_base为environ里初始地址<br>    更改_IO_write_ptr为environ+8<br>在IO_stdin中(stack中写入rop)<br>     更改_IO_buf_base 为返回地址<br>     更改_IO_buf_end 为要写入的末地址<br>我就不再详细去解释了,有兴趣的师傅们自己去调一调把..</p>
