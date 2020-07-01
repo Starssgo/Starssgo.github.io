@@ -5,7 +5,7 @@
     <url>/2020/07/01/%E6%9F%90%E5%A0%86%E5%A4%8D%E7%8E%B0-getchar%E5%BC%95%E5%8F%91malloc/</url>
     <content><![CDATA[<p>最近总是遇到各种scanf，printf等函数的非预期解，总的来说都是缓冲区不够了申请堆块来放置数据。<br>本次用一个例题来阐述getchar函数引发malloc的复现。  </p>
 <a id="more"></a>
-<p>[题目地址] (<a href="http://www.starssgo.top/file/new_heap" target="_blank" rel="noopener">http://www.starssgo.top/file/new_heap</a>)<br>本题测试环境为libc2.29  </p>
+<p><a href="http://www.starssgo.top/file/new_heap" target="_blank" rel="noopener">题目地址</a><br>本题测试环境为libc2.29  </p>
 <h3 id="测试漏洞"><a href="#测试漏洞" class="headerlink" title="测试漏洞"></a>测试漏洞</h3><p>首先我们将程序拖进IDA里,发现是一个菜单题,但是只有add与free，没有打印。<br>在最开始有一个函数<br><img src="/2020/07/01/%E6%9F%90%E5%A0%86%E5%A4%8D%E7%8E%B0-getchar%E5%BC%95%E5%8F%91malloc/1.jpg" alt><br>但是只给了我们一个字节，也就是第二个字节。<br>free函数中存在UAF<br><img src="/2020/07/01/%E6%9F%90%E5%A0%86%E5%A4%8D%E7%8E%B0-getchar%E5%BC%95%E5%8F%91malloc/2.jpg" alt><br>add函数中限制了申请heap的大小，最多为0x78。<br>edit函数中让你输入y才会退出。</p>
 <h3 id="利用思路"><a href="#利用思路" class="headerlink" title="利用思路"></a>利用思路</h3><p>由于我们没有打印函数，所以我们需要让heap中出来libc空间地址，利用更改后两字节来实现对stdout地址的爆破，然后利用堆重叠来更改stdout结构体来实现<br>打印libc空间地址。然后就是常规实现shell操作。  </p>
 <h3 id="实现堆重叠"><a href="#实现堆重叠" class="headerlink" title="实现堆重叠"></a>实现堆重叠</h3><p>这里我们利用edit函数的getchar来实现申请已经释放的堆块。<br>首先填满tcache  </p>
