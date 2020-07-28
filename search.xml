@@ -3,7 +3,7 @@
   <entry>
     <title>DASCTF 7月部分pwn</title>
     <url>/2020/07/25/DASCTF-7%E6%9C%88pwn/</url>
-    <content><![CDATA[<p>这次比赛有点短小啊(滑稽),三个pwn题，做了两个。其中的一道堆质量还挺不错。</p>
+    <content><![CDATA[<p>这次比赛有点短小啊(滑稽),三个pwn题，做了两个。其中的一道堆质量还挺不错。<br>2020-7-27:(eg32已经复现)</p>
 <a id="more"></a>
 <h3 id="签到"><a href="#签到" class="headerlink" title="签到"></a>签到</h3><p>真·签到<br>这道题法子太多了，不论是printf的格式化字符串还是gets的栈溢出都是致命的。<br>只是要注意的是32位的main函数结束的时候有一节汇编用到了ebp，就导致了直接覆盖ebp从而覆盖返回地址就是不可行的了。<br>相关代码：  </p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.text:080485F8                 mov     eax, 0</span><br><span class="line">.text:080485FD                 mov     ecx, [ebp+var_4]</span><br><span class="line">.text:08048600                 leave</span><br><span class="line">.text:08048601                 lea     esp, [ecx-4]  </span><br><span class="line">.text:08048604                 retn</span><br></pre></td></tr></table></figure>
